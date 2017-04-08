@@ -9,7 +9,7 @@ class IndexController extends Controller {
         // $this->success(login);
     }
     public function login(){
-    	$data = [];
+    	$data = array();
     	$data['code'] = 0;
     	$data['message'] = '登录成功';
     	$data['status'] = 200;
