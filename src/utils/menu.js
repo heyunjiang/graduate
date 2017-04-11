@@ -1,20 +1,59 @@
+//最高权限管理员
 module.exports = [
-  {
+  /*{
     key: 'dashboard',
     name: 'Dashboard',
     icon: 'laptop',
   },
   {
-    key: 'users',
-    name: 'User Manage',
-    icon: 'user',
-  },
-  {
     key: 'request',
     name: 'Request',
     icon: 'api',
+  },*/
+  {
+    key: 'programeManagment',
+    name: '项目管理',
+    icon: 'appstore',
+    clickable: false,
+    child: [
+      {
+        key: 'programeList',
+        name: '项目列表',
+        icon: 'bars',
+      },
+      {
+        key: 'programeAdd',
+        name: '新建项目',
+        icon: 'plus-circle-o',
+      },
+      {
+        key: 'myProgrameList',
+        name: '我的项目',
+        icon: 'info',
+      },
+    ],
   },
   {
+    key: 'users',
+    name: '人员管理',
+    icon: 'user',
+  },
+  {
+    key: 'taskManagment',
+    name: '任务管理',
+    icon: 'global',
+  },
+  {
+    key: 'docManagment',
+    name: '文档管理',
+    icon: 'folder',
+  },
+  {
+    key: 'pmsManagment',
+    name: '经费管理',
+    icon: 'pay-circle-o',
+  },
+  /*{
     key: 'UIElement',
     name: 'UI Element',
     icon: 'camera-o',
@@ -98,5 +137,5 @@ module.exports = [
         ],
       },
     ],
-  },
+  },*/
 ]

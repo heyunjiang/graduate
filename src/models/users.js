@@ -47,7 +47,7 @@ export default {
         })
       }
     },
-    *'delete' ({ payload }, { call, put }) {
+    *delete ({ payload }, { call, put }) {
       const data = yield call(remove, { id: payload })
       if (data && data.success) {
         yield put({

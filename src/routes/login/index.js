@@ -1,4 +1,4 @@
-//登录，本该写到components的，但是因为只用一次，所以直接写在这里了
+//登录，本该写到components的，但是这里作为整个页面使用，就写成了一个页面
 import React, { PropTypes } from 'react'
 import { Button, Row, Form, Input } from 'antd'
 import { config } from '../../utils'
@@ -32,6 +32,7 @@ const login = ({
       <form>
         <FormItem hasFeedback>
           {getFieldDecorator('username', {
+            initialValue: "heyunjiang",
             rules: [
               {
                 required: true,
@@ -42,6 +43,7 @@ const login = ({
         </FormItem>
         <FormItem hasFeedback>
           {getFieldDecorator('password', {
+            initialValue: "123456",
             rules: [
               {
                 required: true,
@@ -56,8 +58,8 @@ const login = ({
           </Button>
         </Row>
         <p>
-          <span>账号：guest</span>
-          <span>密码：guest</span>
+          <span>账号：heyunjiang</span>
+          <span>密码：123456</span>
         </p>
       </form>
     </div>

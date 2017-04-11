@@ -29,7 +29,7 @@ function Header ({ user, logout, switchSider, siderFold, isNavbar, menuPopoverVi
         </div>}
       <div className={styles.rightWarpper}>
         <div className={styles.button}>
-          <Icon type="mail" />
+          <a href="https://github.com/heyunjiang/graduate"><Icon type="github" /></a>
         </div>
         <Menu mode="horizontal" onClick={handleClickMenu}>
           <SubMenu style={{
