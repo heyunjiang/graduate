@@ -30,6 +30,8 @@ class IndexController extends Controller {
         if(REQUEST_METHOD == 'POST'){
             $addData['name'] = $request->name;
             $addData['nickName'] = $request->nickName;
+            $addData['title'] = $request->title;
+            $addData['passworld'] = md5($request->passworld);
             $addData['age'] = $request->age;
             $addData['avatar'] = 'https://t.alipayobjects.com/images/T1QUBfXo4fXXXXXXXX.png';
             $addData['isMale'] = $request->isMale;
@@ -44,11 +46,13 @@ class IndexController extends Controller {
             if($request->id){
                 $Users->delete($request->id);
             }
-        }else if(REQUEST_METHOD == 'UPDATE'){//删除用户信息
+        }else if(REQUEST_METHOD == 'PUT'){//更新用户信息
             if($request->id){
                 $addData['id'] = $request->id;
                 $addData['name'] = $request->name;
                 $addData['nickName'] = $request->nickName;
+                $addData['title'] = $request->title;
+                $addData['passworld'] = md5($request->passworld);
                 $addData['age'] = $request->age;
                 $addData['avatar'] = 'https://t.alipayobjects.com/images/T1QUBfXo4fXXXXXXXX.png';
                 $addData['isMale'] = $request->isMale;
@@ -63,7 +67,57 @@ class IndexController extends Controller {
         $data['page'] = array();
         $data['page']['total'] = intval($Users->count());
         $data['page']['current'] = 1;
-        $data['func'] = REQUEST_METHOD;
+
+        $this->ajaxReturn($data);
+    }
+    //项目管理
+    public function programeManagment(){
+        $data = array();
+        $data['success'] = true;
+        $data['data'] = array();
+        $request = json_decode(file_get_contents('php://input'));
+        $table = M('programe');
+        //新增用户
+        if(REQUEST_METHOD == 'POST'){
+            $addData['name'] = $request->name;
+            $addData['nickName'] = $request->nickName;
+            $addData['title'] = $request->title;
+            $addData['passworld'] = md5($request->passworld);
+            $addData['age'] = $request->age;
+            $addData['avatar'] = 'https://t.alipayobjects.com/images/T1QUBfXo4fXXXXXXXX.png';
+            $addData['isMale'] = $request->isMale;
+            $addData['phone'] = $request->phone;
+            $addData['email'] = $request->email;
+            $addData['address'] = $request->address;
+            $addData['createTime'] = date("Y-m-d",time());
+            $table->add($addData);
+        }else if(REQUEST_METHOD == 'GET'){//读取所有用户信息
+            
+        }else if(REQUEST_METHOD == 'DELETE'){//删除用户信息
+            if($request->id){
+                $table->delete($request->id);
+            }
+        }else if(REQUEST_METHOD == 'PUT'){//更新用户信息
+            if($request->id){
+                $addData['id'] = $request->id;
+                $addData['name'] = $request->name;
+                $addData['nickName'] = $request->nickName;
+                $addData['title'] = $request->title;
+                $addData['passworld'] = md5($request->passworld);
+                $addData['age'] = $request->age;
+                $addData['avatar'] = 'https://t.alipayobjects.com/images/T1QUBfXo4fXXXXXXXX.png';
+                $addData['isMale'] = $request->isMale;
+                $addData['phone'] = $request->phone;
+                $addData['email'] = $request->email;
+                $addData['address'] = $request->address;
+                $addData['createTime'] = date("Y-m-d",time());
+                $table->save($addData);
+            }
+        }
+        $data['data'] = $table->select();
+        $data['page'] = array();
+        $data['page']['total'] = intval($table->count());
+        $data['page']['current'] = 1;
 
         $this->ajaxReturn($data);
     }

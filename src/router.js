@@ -33,6 +33,15 @@ const Routers = function ({ history, app }) {
             }, 'dashboard')
           },
         }, {
+          path: 'programeManagment',
+          name: 'programeManagment',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/programeManagment'))
+              cb(null, require('./routes/programeManagment/'))
+            }, 'programeManagment')
+          },
+        }, {
           path: 'users',
           name: 'users',
           getComponent (nextState, cb) {

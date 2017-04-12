@@ -14,24 +14,6 @@ module.exports = [
     key: 'programeManagment',
     name: '项目管理',
     icon: 'appstore',
-    clickable: false,
-    child: [
-      {
-        key: 'programeList',
-        name: '项目列表',
-        icon: 'bars',
-      },
-      {
-        key: 'programeAdd',
-        name: '新建项目',
-        icon: 'plus-circle-o',
-      },
-      {
-        key: 'myProgrameList',
-        name: '我的项目',
-        icon: 'info',
-      },
-    ],
   },
   {
     key: 'users',
@@ -52,6 +34,37 @@ module.exports = [
     key: 'pmsManagment',
     name: '经费管理',
     icon: 'pay-circle-o',
+  },
+  {
+    key: 'personal',
+    name: '个人中心',
+    icon: 'coffee',
+    clickable: false,
+    child: [
+      {
+        key: 'personalInfo',
+        name: '个人信息',
+        icon: 'bars',
+      },
+      {
+        key: 'myProgrameList',
+        name: '我的项目',
+        icon: 'info',
+      },
+    ],
+  },
+  {
+    key: 'others',
+    name: '其它配置',
+    icon: 'star-o',
+    clickable: false,
+    child: [
+      {
+        key: 'titleManagment',
+        name: '职位类别管理',
+        icon: 'team',
+      },
+    ],
   },
   /*{
     key: 'UIElement',

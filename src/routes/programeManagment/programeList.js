@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Table, Modal } from 'antd'
-import styles from './UserList.less'
+// import styles from './UserList.less'
 import classnames from 'classnames'
 import AnimTableBody from '../../components/DataTable/AnimTableBody'
 import { DropOption } from '../../components'
@@ -9,12 +9,13 @@ import { DropOption } from '../../components'
 const confirm = Modal.confirm
 
 function list ({ loading, dataSource, pagination, onPageChange, onDeleteItem, onEditItem, isMotion, location }) {
+  //编辑、删除处理函数
   const handleMenuClick = (record, e) => {
     if (e.key === '1') {
       onEditItem(record)
     } else if (e.key === '2') {
       confirm({
-        title: '您确定要删除这条记录吗?',
+        title: '您确定要删除这个项目吗?',
         onOk () {
           onDeleteItem(record.id)
         },
@@ -24,55 +25,53 @@ function list ({ loading, dataSource, pagination, onPageChange, onDeleteItem, on
 
   const columns = [
     {
-      title: '头像',
-      dataIndex: 'avatar',
-      key: 'avatar',
+      title: '编号',
+      dataIndex: 'id',
+      key: 'id',
       width: 64,
       fixed: 'left',
-      className: styles.avatar,
-      render: (text) => <img alt={'avatar'} width={24} src={text} />,
     }, {
-      title: '姓名',
+      title: '名称',
       dataIndex: 'name',
       width: 100,
       fixed: 'left',
       key: 'name',
     }, {
-      title: '昵称',
-      dataIndex: 'nickName',
-      key: 'nickName',
+      title: '类型',
+      dataIndex: 'type',
+      key: 'type',
     }, {
-      title: '职位',
-      dataIndex: 'title',
-      key: 'title',
+      title: '描述',
+      dataIndex: 'des',
+      key: 'des',
     }, {
-      title: '年龄',
-      dataIndex: 'age',
-      key: 'age',
-      render: (text) => <span>{text}岁</span>,
+      title: '创建者',
+      dataIndex: 'creator',
+      key: 'creator'
     }, {
-      title: '性别',
-      dataIndex: 'isMale',
-      key: 'isMale',
-      render: (text) => <span>{text
-            ? '男'
-            : '女'}</span>,
+      title: '预期成果',
+      dataIndex: 'expectValue',
+      key: 'expectValue'
     }, {
-      title: '电话',
-      dataIndex: 'phone',
-      key: 'phone',
+      title: '预计开始时间',
+      dataIndex: 'expectStartTime',
+      key: 'expectStartTime',
     }, {
-      title: '邮箱',
-      dataIndex: 'email',
-      key: 'email',
+      title: '预计结束时间',
+      dataIndex: 'expectEndTime',
+      key: 'expectEndTime',
     }, {
-      title: '住址',
-      dataIndex: 'address',
-      key: 'address',
+      title: '进展状态',
+      dataIndex: 'status',
+      key: 'status',
     }, {
       title: '创建时间',
       dataIndex: 'createTime',
       key: 'createTime',
+    },  {
+      title: '成员',
+      dataIndex: 'member',
+      key: 'member',
     }, {
       title: '操作',
       key: 'operation',
@@ -94,7 +93,6 @@ function list ({ loading, dataSource, pagination, onPageChange, onDeleteItem, on
   return (
     <div>
       <Table
-        className={classnames({ [styles.table]: true, [styles.motion]: isMotion })}
         bordered
         scroll={{ x: 1200 }}
         columns={columns}
