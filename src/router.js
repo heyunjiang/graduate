@@ -18,9 +18,9 @@ const Routers = function ({ history, app }) {
       component: App,
       getIndexRoute (nextState, cb) {
         require.ensure([], require => {
-          registerModel(app, require('./models/dashboard'))
-          cb(null, { component: require('./routes/dashboard/') })
-        }, 'dashboard')
+          registerModel(app, require('./models/programeManagment'))
+          cb(null, { component: require('./routes/programeManagment/') })
+        }, 'programeManagment')
       },
       childRoutes: [
         {
@@ -49,6 +49,15 @@ const Routers = function ({ history, app }) {
               registerModel(app, require('./models/users'))
               cb(null, require('./routes/users/'))
             }, 'users')
+          },
+        }, {
+          path: 'taskManagment',
+          name: 'taskManagment',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              registerModel(app, require('./models/taskManagment'))
+              cb(null, require('./routes/taskManagment/'))
+            }, 'taskManagment')
           },
         }, {
           path: 'request',

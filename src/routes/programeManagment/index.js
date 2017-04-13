@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { routerRedux } from 'dva/router'
 import { connect } from 'dva'
 import ProgrameList from './programeList'
+import ProgrameHeader from './programeHeader'
 
 function programe ({ location, dispatch, programeManagment, loading }) {
  	const { list, pagination, currentItem, modalVisible, modalType, isMotion } = programeManagment;
@@ -21,9 +22,15 @@ function programe ({ location, dispatch, programeManagment, loading }) {
 
 		},
 	}
+	const programeHeaderProps = {
+		onAdd(){
+			
+		}
+	}
 
   return (
     <div className="content-inner">
+      <ProgrameHeader {...programeHeaderProps} />
       <ProgrameList {...programeListProps} />
     </div>
   )
