@@ -3,14 +3,26 @@
 import React, { PropTypes } from 'react'
 import { routerRedux } from 'dva/router'
 import { connect } from 'dva'
+import TaskHeader from './taskHeader'
+import TaskCardBox from './taskCardBox'
 
 function task ({ location, dispatch, taskManagment, loading }) {
- 	const { list, pagination, currentItem, modalVisible, modalType, isMotion } = taskManagment;
+ 	const { list, pagination, currentItem, modalVisible, modalType, isMotion, programeData } = taskManagment;
 	
+  const taskHeaderProps = {
+    programeData: programeData,
+    onAdd(){
+
+    },
+    handleChange(value){
+      console.log(value);
+    },
+  }
 
   return (
     <div className="content-inner">
-    	hello world
+    	<TaskHeader {...taskHeaderProps} />
+      <TaskCardBox />
     </div>
   )
 }

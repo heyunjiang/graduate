@@ -11,7 +11,7 @@ const ProgrameHeader = ({
         
       </Col>
       <Col lg={{ offset: 8, span: 8 }} md={12} sm={8} xs={24} style={{ marginBottom: 16, textAlign: 'right' }}>
-        <Button size="large" type="primary" onClick={onAdd}>新建任务</Button>
+        <Button size="large" type="primary" onClick={onAdd}>新建项目</Button>
       </Col>
     </Row>
   )

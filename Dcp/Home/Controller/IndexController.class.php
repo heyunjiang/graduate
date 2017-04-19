@@ -7,8 +7,8 @@ header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
 header("Content-Type: text/html; charset=UTF-8");
 class IndexController extends Controller {
     public function index(){
-    	$Users = M('Users');
-        dump($Users->select());
+    	$task = M('task');
+        dump($task->select());
         // $this->success(login);
     }
     public function login(){
@@ -114,6 +114,20 @@ class IndexController extends Controller {
                 $table->save($addData);
             }
         }
+        $data['data'] = $table->select();
+        $data['page'] = array();
+        $data['page']['total'] = intval($table->count());
+        $data['page']['current'] = 1;
+
+        $this->ajaxReturn($data);
+    }
+    //任务管理
+    public function taskManagment(){
+        $data = array();
+        $data['success'] = true;
+        $data['data'] = array();
+        $request = json_decode(file_get_contents('php://input'));
+        $table = M('task');
         $data['data'] = $table->select();
         $data['page'] = array();
         $data['page']['total'] = intval($table->count());

@@ -5,7 +5,7 @@ import { parse } from 'qs'
 export default {
   namespace: 'app',
   state: {
-    login: false,
+    login: true,
     user: {
       name: '吴彦祖',
     },

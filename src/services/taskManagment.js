@@ -3,7 +3,7 @@ import config from '../utils/config'
 
 export async function query (params) {
   return request({
-    url: config.server+'Index/programeManagment',
+    url: config.server+'Index/taskManagment',
     method: 'get',
     data: params,
   })

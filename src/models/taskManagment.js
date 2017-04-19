@@ -19,6 +19,7 @@ export default {
       current: 1,
       total: null,
     },
+    programeData: [{'id':1, 'name':'dcp'}, {'id':2, 'name':'albumo'}],
   },
 
   subscriptions: {
