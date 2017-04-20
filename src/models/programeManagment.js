@@ -9,7 +9,7 @@ export default {
   state: {
     list: [],
     currentItem: {},
-    modalVisible: false,
+    newModalVisible: false,
     modalType: 'create',
     isMotion: false,
     pagination: {
@@ -47,6 +47,19 @@ export default {
         })
       }
     },
+    *create ({ payload }, { call, put }) {
+      yield put({ type: 'hideModal' })
+      const data = yield call(create, payload)
+      if (data && data.success) {
+        yield put({
+          type: 'querySuccess',
+          payload: {
+            list: data.data,
+            pagination: data.page,
+          },
+        })
+      }
+    },
   },
 
   reducers: {
@@ -58,6 +71,12 @@ export default {
           ...state.pagination,
           ...pagination,
         } }
+    },
+    showModal (state) {
+      return { ...state, newModalVisible: true }
+    },
+    hideModal (state) {
+      return { ...state, newModalVisible: false }
     },
   }
 }

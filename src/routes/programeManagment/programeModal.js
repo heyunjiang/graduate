@@ -1,7 +1,10 @@
 //还未修改
 import React, { PropTypes } from 'react'
-import { Form, Input, InputNumber, Radio, Modal } from 'antd'
+import { Form, Input, InputNumber, Checkbox, Modal, Select, DatePicker } from 'antd'
 const FormItem = Form.Item
+const Option = Select.Option
+const { RangePicker } = DatePicker
+const CheckboxGroup = Checkbox.Group
 
 const formItemLayout = {
   labelCol: {
@@ -13,123 +16,71 @@ const formItemLayout = {
 }
 
 const modal = ({
+  form,
   visible,
-  type,
-  item = {},
   onOk,
   onCancel,
-  form: {
-    getFieldDecorator,
-    validateFields,
-    getFieldsValue,
-  },
 }) => {
-  function handleOk () {
+  const {getFieldDecorator, validateFields, getFieldsValue} = form;
+  const dateFormat = 'YYYY/MM/DD';
+  function handleOk(){
     validateFields((errors) => {
       if (errors) {
         return
       }
       const data = {
         ...getFieldsValue(),
-        key: item.key,
       }
       onOk(data)
     })
   }
-
   const modalOpts = {
-    title: `${type === 'create' ? '新建用户' : '修改用户'}`,
+    title: `新建项目`,
     visible,
     onOk: handleOk,
     onCancel,
     wrapClassName: 'vertical-center-modal',
   }
-
+  const userGroup = [{ label: 'heyunjiang', value: '1' },{ label: '么么哒', value: '4' }];
   return (
     <Modal {...modalOpts}>
-      <Form layout="horizontal">
-        <FormItem label="姓名：" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('name', {
-            initialValue: item.name,
-            rules: [
-              {
-                required: true,
-                message: '姓名未填写',
-              },
-            ],
-          })(<Input />)}
+      <Form>
+        <FormItem label="项目名称" {...formItemLayout}>
+            {getFieldDecorator('name', {
+              rules: [{ required: true, message: '请输入项目名称!' }],
+            })(
+              <Input />
+            )}
         </FormItem>
-        <FormItem label="昵称：" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('nickName', {
-            initialValue: item.nickName,
-            rules: [
-              {
-                required: true,
-                message: '昵称未填写',
-              },
-            ],
-          })(<Input />)}
+        <FormItem label="项目类型" {...formItemLayout}>
+            {getFieldDecorator('type',{
+              initialValue: '个人项目',
+            })(
+              <Select>
+                <Option value="个人项目">个人项目</Option>
+                <Option value="团队项目">团队项目</Option>
+              </Select>
+            )}
         </FormItem>
-        <FormItem label="职位：" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('title', {
-            initialValue: item.title,
-            rules: [
-              {
-                required: true,
-                message: '职位未填写',
-              },
-            ],
-          })(<Input />)}
+        <FormItem label="项目描述" {...formItemLayout}>
+            {getFieldDecorator('des')(
+              <Input type="textarea" />
+            )}
         </FormItem>
-        <FormItem label="密码：" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('passworld', {
-            rules: [
-              {
-                required: true,
-                message: '密码未填写',
-              },
-            ],
-          })(<Input />)}
+        <FormItem label="预期成果" {...formItemLayout}>
+            {getFieldDecorator('expectValue')(
+              <Input type="textarea" />
+            )}
         </FormItem>
-        <FormItem label="性别" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('isMale', {
-            initialValue: item.isMale,
-            rules: [],
-          })(
-            <Radio.Group>
-              <Radio value>男</Radio>
-              <Radio value={false}>女</Radio>
-            </Radio.Group>
-          )}
+        <FormItem label="预期时间" {...formItemLayout}>
+            {getFieldDecorator('expectTime')(
+              <RangePicker />
+            )}
         </FormItem>
-        <FormItem label="年龄：" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('age', {
-            initialValue: item.age,
-            rules: [],
-          })(<InputNumber min={18} max={100} />)}
-        </FormItem>
-        <FormItem label="电话：" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('phone', {
-            initialValue: item.phone,
-            rules: [],
-          })(<Input />)}
-        </FormItem>
-        <FormItem label="邮箱：" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('email', {
-            initialValue: item.email,
-            rules: [],
-          })(<Input />)}
-        </FormItem>
-        <FormItem label="住址：" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('address', {
-            initialValue: item.address,
-            rules: [
-              {
-                required: true,
-                message: '不能为空',
-              },
-            ],
-          })(<Input />)}
+        <FormItem label="项目成员" {...formItemLayout}>
+            {getFieldDecorator('member')(
+              <CheckboxGroup options={userGroup} />
+            )}
         </FormItem>
       </Form>
     </Modal>
@@ -139,8 +90,6 @@ const modal = ({
 modal.propTypes = {
   form: PropTypes.object.isRequired,
   visible: PropTypes.bool,
-  type: PropTypes.string,
-  item: PropTypes.object,
   onCancel: PropTypes.func,
   onOk: PropTypes.func,
 }

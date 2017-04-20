@@ -3,9 +3,10 @@ import { routerRedux } from 'dva/router'
 import { connect } from 'dva'
 import ProgrameList from './programeList'
 import ProgrameHeader from './programeHeader'
+import ProgrameModal from './programeModal'
 
 function programe ({ location, dispatch, programeManagment, loading }) {
- 	const { list, pagination, currentItem, modalVisible, modalType, isMotion } = programeManagment;
+ 	const { list, pagination, currentItem, newModalVisible, modalType, isMotion } = programeManagment;
 	const programeListProps = {
 		dataSource: list,
 		loading,
@@ -24,12 +25,29 @@ function programe ({ location, dispatch, programeManagment, loading }) {
 	}
 	const programeHeaderProps = {
 		onAdd(){
-			
+			dispatch({
+		        type: `programeManagment/showModal`,
+		    })
 		}
+	}
+	const programeModalProps = {
+		visible: newModalVisible,
+		onOk(data){
+			dispatch({
+		        type: `programeManagment/create`,
+		        payload: data,
+		    })
+		},
+		onCancel(){
+			dispatch({
+		        type: `programeManagment/hideModal`,
+		    })
+		},
 	}
 
   return (
     <div className="content-inner">
+      <ProgrameModal {...programeModalProps} />
       <ProgrameHeader {...programeHeaderProps} />
       <ProgrameList {...programeListProps} />
     </div>

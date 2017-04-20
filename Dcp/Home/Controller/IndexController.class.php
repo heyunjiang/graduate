@@ -59,7 +59,6 @@ class IndexController extends Controller {
                 $addData['phone'] = $request->phone;
                 $addData['email'] = $request->email;
                 $addData['address'] = $request->address;
-                $addData['createTime'] = date("Y-m-d",time());
                 $Users->save($addData);
             }
         }
@@ -80,16 +79,16 @@ class IndexController extends Controller {
         //新增用户
         if(REQUEST_METHOD == 'POST'){
             $addData['name'] = $request->name;
-            $addData['nickName'] = $request->nickName;
-            $addData['title'] = $request->title;
-            $addData['passworld'] = md5($request->passworld);
-            $addData['age'] = $request->age;
-            $addData['avatar'] = 'https://t.alipayobjects.com/images/T1QUBfXo4fXXXXXXXX.png';
-            $addData['isMale'] = $request->isMale;
-            $addData['phone'] = $request->phone;
-            $addData['email'] = $request->email;
-            $addData['address'] = $request->address;
+            $addData['type'] = $request->type;
+            $addData['des'] = $request->des;
+            $addData['creator'] = 'heyunjiang';
+            $addData['expectValue'] = $request->expectValue;
+            $addData['expectStartTime'] = $request->expectTime[0];
+            $addData['expectEndTime'] = $request->expectTime[1];
+            $addData['status'] = '未开始';
             $addData['createTime'] = date("Y-m-d",time());
+            $addData['member'] = 'heyunjiang';
+            $addData['memberId'] = $request->member[0];
             $table->add($addData);
         }else if(REQUEST_METHOD == 'GET'){//读取所有用户信息
             
@@ -101,16 +100,15 @@ class IndexController extends Controller {
             if($request->id){
                 $addData['id'] = $request->id;
                 $addData['name'] = $request->name;
-                $addData['nickName'] = $request->nickName;
-                $addData['title'] = $request->title;
-                $addData['passworld'] = md5($request->passworld);
-                $addData['age'] = $request->age;
-                $addData['avatar'] = 'https://t.alipayobjects.com/images/T1QUBfXo4fXXXXXXXX.png';
-                $addData['isMale'] = $request->isMale;
-                $addData['phone'] = $request->phone;
-                $addData['email'] = $request->email;
-                $addData['address'] = $request->address;
-                $addData['createTime'] = date("Y-m-d",time());
+                $addData['type'] = $request->type;
+                $addData['des'] = $request->des;
+                $addData['creator'] = 'heyunjiang';
+                $addData['expectValue'] = $request->expectValue;
+                $addData['expectStartTime'] = $request->expectTime[0];
+                $addData['expectEndTime'] = $request->expectTime[1];
+                $addData['status'] = '未开始';
+                $addData['member'] = 'heyunjiang';
+                $addData['memberId'] = $request->member[0];
                 $table->save($addData);
             }
         }
