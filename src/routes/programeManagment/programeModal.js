@@ -1,4 +1,4 @@
-//还未修改
+//除了编辑，其他都已经实现了，currentItem已经获取到了
 import React, { PropTypes } from 'react'
 import { Form, Input, InputNumber, Checkbox, Modal, Select, DatePicker } from 'antd'
 const FormItem = Form.Item
@@ -20,6 +20,7 @@ const modal = ({
   visible,
   onOk,
   onCancel,
+  currentItem = {},
 }) => {
   const {getFieldDecorator, validateFields, getFieldsValue} = form;
   const dateFormat = 'YYYY/MM/DD';
@@ -89,6 +90,7 @@ const modal = ({
 
 modal.propTypes = {
   form: PropTypes.object.isRequired,
+  currentItem: PropTypes.object,
   visible: PropTypes.bool,
   onCancel: PropTypes.func,
   onOk: PropTypes.func,

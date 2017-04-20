@@ -47,6 +47,21 @@ export default {
         })
       }
     },
+    *delete ({ payload }, { call, put }) {
+      const data = yield call(remove, { id: payload })
+      if (data && data.success) {
+        yield put({
+          type: 'querySuccess',
+          payload: {
+            list: data.data,
+            pagination: {
+              total: data.page.total,
+              current: data.page.current,
+            },
+          },
+        })
+      }
+    },
     *create ({ payload }, { call, put }) {
       yield put({ type: 'hideModal' })
       const data = yield call(create, payload)
@@ -72,8 +87,8 @@ export default {
           ...pagination,
         } }
     },
-    showModal (state) {
-      return { ...state, newModalVisible: true }
+    showModal (state,action) {
+      return { ...state, ...action.payload, newModalVisible: true }
     },
     hideModal (state) {
       return { ...state, newModalVisible: false }

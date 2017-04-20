@@ -17,10 +17,18 @@ function programe ({ location, dispatch, programeManagment, loading }) {
 
 		},
 		onDeleteItem (id) {
-
+			dispatch({
+		        type: `programeManagment/delete`,
+		        payload: id,
+		    })
 		},
 		onEditItem (item) {
-
+			dispatch({
+		        type: 'programeManagment/showModal',
+		        payload: {
+		          currentItem: item,
+		        },
+		    })
 		},
 	}
 	const programeHeaderProps = {
@@ -31,6 +39,7 @@ function programe ({ location, dispatch, programeManagment, loading }) {
 		}
 	}
 	const programeModalProps = {
+		currentItem,
 		visible: newModalVisible,
 		onOk(data){
 			dispatch({
