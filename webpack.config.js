@@ -1,3 +1,4 @@
+/*增加webpack插件，配置atool-build*/
 const webpack = require('atool-build/lib/webpack')
 
 module.exports = function (webpackConfig, env) {
